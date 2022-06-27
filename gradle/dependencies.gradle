@@ -1,0 +1,65 @@
+ext {
+    versions = [
+        assertJ                : '3.22.0',             // Assertion library for test cases
+        h2                     : '2.1.214',
+        junitSystemRules       : '1.19.0',    // JUnit extensions
+        junit                  : '5.8.2',               // JUnit Jupiter
+        liquibase              : '4.12.0',           // Database schema initialization & evolution
+        lombok                 : '1.18.24',              // Lombok annotation processor
+        log4j                  : '2.17.2',               // Logging
+        mockito                : '4.4.0',             // Mocking library
+        postgresql             : '42.4.0',          // PostgreSQL library
+        r2dbcH2                : '0.9.1.RELEASE',            // r2dbc-h2
+        r2dbcSpi               : '1.0.0.RELEASE',           // r2dbc-spi
+        springBoot             : '2.7.1',          // Spring Boot
+        springCloud            : '3.1.3',         // Spring Cloud
+        problemJacksonDataType : '0.27.1',  // Zalando's Jackson DataType
+        problemSpringWeb       : '0.27.0',    // Zalando's Problem API
+        reactorTest            : '3.4.19',         // reactor-test library
+        testContainers         : '1.17.2',      // Test containers for integration testing
+        truth                  : '1.1.3'                // Google's assertion library
+        ]
+
+
+    libs = [
+        assertJ                     : "org.assertj:assertj-core:$versions.assertJ",
+        h2                          : "com.h2database:h2:$versions.h2",
+        jacksonDatatypeJsr310       : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+        junitBillOfMaterial         : "org.junit:junit-bom:$versions.junit",
+        junitJupiter                : "org.junit.jupiter:junit-jupiter",
+        junitPlatformRunner         : "org.junit.platform:junit-platform-runner",
+
+        // See https://stefanbirkner.github.io/system-rules/
+        junitSystemRules            : "com.github.stefanbirkner:system-rules:$versions.junitSystemRules",
+
+        log4j                       : "org.apache.logging:log4j:log4j-core:$versions.log4j",
+        lombok                      : "org.projectlombok:lombok:$versions.lombok",
+        liquibaseCore               : "org.liquibase:liquibase-core:$versions.liquibase",
+        mockito                     : "org.mockito:mockito-core:$versions.mockito",
+        r2dbcH2                     : "io.r2dbc:r2dbc-h2:$versions.r2dbcH2",
+        r2dbcSpi                    : "io.r2dbc:r2dbc-spi:$versions.r2dbcSpi",
+        postgresql                  : "org.postgresql:postgresql:$versions.postgresql",
+        problemSpringWeb            : "org.zalando:problem-spring-web-starter:$versions.problemSpringWeb",
+        problemSpringWebFlux        : "org.zalando:problem-spring-webflux:$versions.problemSpringWeb",
+        problemJacksonDataType      : "org.zalando:jackson-datatype-problem:$versions.problemJacksonDataType",
+        reactorTest                 : "io.projectreactor:reactor-test:$versions.reactorTest",
+        truth                       : "com.google.truth:truth:$versions.truth",
+
+        // Spring's dependency management plugin will auto-resolve the Spring library versions
+        springBootConfigProcessor   : "org.springframework.boot:spring-boot-configuration-processor",
+        springBootStarterActuator   : "org.springframework.boot:spring-boot-starter-actuator",
+        springBootStarterAop        : "org.springframework.boot:spring-boot-starter-aop",
+        springBootStarterWeb        : "org.springframework.boot:spring-boot-starter-web",
+        springBootStarterWebFlux    : "org.springframework.boot:spring-boot-starter-webflux",
+        springBootStarterDataJpa    : "org.springframework.boot:spring-boot-starter-data-jpa",
+        springBootStarterDataR2dbc  : "org.springframework.boot:spring-boot-starter-data-r2dbc",
+        springBootStarterTest       : "org.springframework.boot:spring-boot-starter-test",
+        springBootStarterValidation : "org.springframework.boot:spring-boot-starter-validation",
+        springCloud                 : "org.springframework.cloud:spring-cloud-starter:$versions.springCloud",
+        springDevTools              : "org.springframework.boot:spring-boot-devtools",
+
+        testContainersBom           : "org.testcontainers:testcontainers-bom:$versions.testContainers",
+        testContainersPostgres      : "org.testcontainers:postgresql",
+        testContainersJupiter       : "org.testcontainers:junit-jupiter"
+        ]
+}

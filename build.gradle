@@ -1,0 +1,99 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.coditory.integration-test' version '1.4.0'
+    id 'java'
+    id 'idea'
+    id 'jacoco'
+    id 'org.sonarqube' version '3.4.0.2513'
+    id 'com.github.ben-manes.versions' version '0.42.0'
+    id 'com.google.cloud.tools.jib' version '3.2.1'
+    id 'com.diffplug.spotless' version '6.7.2'
+    id 'io.freefair.lombok' version '6.5.0.2'
+}
+
+apply from: "gradle/standard-setup.gradle"      // standard project set-up
+
+apply plugin: 'io.spring.dependency-management'
+
+version='0.0.1'
+
+// --------------------------------------------------------------------------------
+// Enable compiling with a specific Java version,
+// independent of the developer's current Java version.
+// --------------------------------------------------------------------------------
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
+}
+
+// --------------------------------------------------------------------------------
+// Configuration
+// --------------------------------------------------------------------------------
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+// --------------------------------------------------------------------------------
+// Repositories
+// --------------------------------------------------------------------------------
+repositories {
+    mavenCentral()
+}
+
+
+// --------------------------------------------------------------------------------
+// Dependencies
+// --------------------------------------------------------------------------------
+dependencies {
+    annotationProcessor libs.springBootConfigProcessor
+
+    developmentOnly libs.springDevTools
+
+    implementation libs.jacksonDatatypeJsr310
+    implementation libs.r2dbcH2
+    implementation libs.r2dbcSpi
+    implementation libs.springBootStarterDataR2dbc
+    implementation libs.springBootStarterAop
+    implementation libs.springBootStarterActuator
+    implementation libs.springBootStarterWebFlux
+    implementation libs.springBootStarterValidation
+    implementation libs.problemSpringWebFlux
+    implementation libs.problemJacksonDataType
+
+    runtimeOnly libs.h2
+
+    testAnnotationProcessor libs.lombok
+    testCompileOnly libs.lombok
+    testImplementation (libs.springBootStarterTest){
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation (platform( libs.junitBillOfMaterial ))
+    testImplementation libs.junitJupiter
+    testImplementation libs.reactorTest
+}
+
+// --------------------------------------------------------------------------------
+// Make all tests use JUnit 5
+// --------------------------------------------------------------------------------
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging { events "passed", "skipped", "failed" }
+}
+
+// --------------------------------------------------------------------------------
+// Jib specific configuration for this application
+// --------------------------------------------------------------------------------
+jib {
+    to {
+        image = 'user-service'
+        tags = [ '0.0.1' ]
+    }
+}
